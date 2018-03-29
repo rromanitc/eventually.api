@@ -35,7 +35,9 @@ class CustomVote extends React.Component {
 
     getData = () => {
         getAnswersWithMembers(this.props.eventId, this.props.voteId).then(response => {
-            this.setState({answers: response.data['answers_members']});
+            this.setState({
+                answers: response.data['answers_members']
+            });
         });
     }
 
@@ -45,9 +47,9 @@ class CustomVote extends React.Component {
         });
     };
 
-    handleOpen = answerMembers => {
+    handleOpen = (event, answerMembers) => {
         this.setState({
-            open: true,
+            open: Object.keys(answerMembers).length == 0 ? false : true,
             currentAnswerMembers: answerMembers
         });
     };
@@ -71,15 +73,17 @@ class CustomVote extends React.Component {
             return <RadioButton
                 key={answer.id.toString()}
                 value={choice}
+                disabled={this.props.disabled}
                 label={
                     <div>
                         <div style={{float: 'left'}}>{answer.text}</div>
                         <Badge
                             key={answer.id.toString()}
                             badgeContent={answer.members.length}
+                            badgeStyle={answer.members.length == 0 ? {backgroundColor: '#e4e4e4'} : {}}
                             primary={true}
                             style={{float: 'right', zIndex: '100'}}
-                            onClick={() => this.handleOpen(answer.members)}
+                            onClick={event => this.handleOpen(event, answer.members)}
                         >
                         </Badge>
                     </div>

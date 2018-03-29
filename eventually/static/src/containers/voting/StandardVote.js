@@ -83,6 +83,7 @@ class StandardVote extends React.Component {
                 label={answer.text}
                 style={styles.radioButton}
                 id={answer.id}
+                disabled={this.props.disabled}
             />;
         });
     }
@@ -200,7 +201,8 @@ class StandardVote extends React.Component {
                                 label={'Participants'}
                                 onClick={this.handleOpenParticipants}
                                 style={styles.raisedButton}
-                                backgroundColor={lightGreen400}/>
+                                backgroundColor={lightGreen400}
+                                disabled={this.state.participants.length == 0 ? true : false}/>
                             <ParticipantListDialog
                                 participants={this.state.participants}
                                 open={this.state.openParticipants}
@@ -210,7 +212,8 @@ class StandardVote extends React.Component {
                                 label={'Potential Participants'}
                                 onClick={this.handleOpenPotentialParticipants}
                                 style={styles.raisedButton}
-                                backgroundColor={lightGreen400}/>
+                                backgroundColor={lightGreen400}
+                                disabled={this.state.potentialParticipants.length == 0 ? true : false}/>
                             <ParticipantListDialog
                                 participants={this.state.potentialParticipants}
                                 open={this.state.openPotentialParticipants}

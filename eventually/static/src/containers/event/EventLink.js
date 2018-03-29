@@ -68,7 +68,8 @@ class EventLink extends React.Component {
         this.props.history.push({
             pathname: '/events/' + this.props.id + '/vote',
             state: {
-                teamId: this.state.teamId
+                teamId: this.state.teamId,
+                startAt: this.props.start_at
             }
         });
     };
